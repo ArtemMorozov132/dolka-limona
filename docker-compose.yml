@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: magnit-dashboard-backend
+    ports:
+      - "8081:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: magnit-dashboard-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
