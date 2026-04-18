@@ -57,10 +57,10 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
           zmax: metric.maxValue || 1,
           colorscale,
           marker: {
-            opacity: 0.72,
+            opacity: 0.62,
             line: {
-              color: "#f8fafc",
-              width: 1.5,
+              color: "rgba(255, 255, 255, 0.24)",
+              width: 1.2,
             },
           },
           customdata: customData,
@@ -68,11 +68,18 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
             title: {
               text: metric.label,
               font: {
-                color: "#dbeafe",
+                color: "#f4f1ef",
               },
             },
             tickfont: {
-              color: "#dbeafe",
+              color: "#f4f1ef",
+            },
+          },
+          hoverlabel: {
+            bgcolor: "#050505",
+            bordercolor: "#ff0912",
+            font: {
+              color: "#f4f1ef",
             },
           },
           hovertemplate:
@@ -85,13 +92,13 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
       ]}
       layout={{
         autosize: true,
-        height: 640,
-        margin: { l: 0, r: 0, t: 20, b: 0 },
+        height: 650,
+        margin: { l: 0, r: 0, t: 16, b: 0 },
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         font: {
           family: '"Segoe UI Variable Text", "Segoe UI", sans-serif',
-          color: "#f8fafc",
+          color: "#f4f1ef",
         },
         mapbox: {
           style: "carto-darkmatter",

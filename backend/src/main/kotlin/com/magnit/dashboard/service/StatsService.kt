@@ -135,11 +135,11 @@ class StatsService {
                 MetricDefinition(
                     id = "lateRate",
                     label = "Опоздания",
-                    description = "Share of orders where actual delivery time exceeded promised time.",
+                    description = "Доля заказов, у которых фактическое время доставки превысило обещанное.",
                     minValue = 0.0,
                     maxValue = 40.0,
                     unit = "%",
-                    colorScale = listOf("#fff4e6", "#ffbf69", "#ff7b54", "#d7263d"),
+                    colorScale = listOf("#170406", "#4b0e12", "#8b1218", "#ff0912"),
                 ),
                 MetricDefinition(
                     id = "deliveryTime",
@@ -148,7 +148,7 @@ class StatsService {
                     minValue = 0.0,
                     maxValue = deliveryMax,
                     unit = "мин",
-                    colorScale = listOf("#eef6ff", "#9ad1ff", "#3f8efc", "#1939b7"),
+                    colorScale = listOf("#222222", "#555555", "#8b1218", "#ff565d"),
                 ),
                 MetricDefinition(
                     id = "orderCount",
@@ -157,7 +157,7 @@ class StatsService {
                     minValue = 0.0,
                     maxValue = orderMax,
                     unit = "шт",
-                    colorScale = listOf("#f3ffe5", "#b8e986", "#4caf50", "#1f6b2c"),
+                    colorScale = listOf("#101010", "#3c3c3c", "#8a8a8a", "#f4f1ef"),
                 ),
             ),
             rings = ringOrder.map { RingDefinition(id = it, label = it) },

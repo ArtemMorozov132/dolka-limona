@@ -4,18 +4,29 @@ import { MetricToggle } from "./components/MetricToggle";
 import { TimeSlider } from "./components/TimeSlider";
 import { useStatsData } from "./hooks/useStatsData";
 
+const deckSections = [
+  "Обзор российского рынка",
+  "Стратегия",
+  "Магнит сегодня",
+  "Операционные и финансовые результаты",
+  "Команда",
+];
+
 const metricDetails = {
   lateRate: {
     title: "Процент опозданий",
-    caption: "Late means actual delivery time exceeded promised time.",
+    caption:
+      "Опозданием считаем заказ, у которого фактическое время доставки превысило обещанный клиенту интервал.",
   },
   deliveryTime: {
     title: "Время доставки",
-    caption: "Среднее время восстанавливается по корзинам `cte_bin` и показывает нагрузку по радиусам.",
+    caption:
+      "Среднее время доставки восстановлено по корзинам `cte_bin` и помогает увидеть, где логистика начинает терять темп.",
   },
   orderCount: {
     title: "Количество заказов",
-    caption: "Помогает увидеть, где в текущий час концентрируется спрос.",
+    caption:
+      "Показывает, в каких кольцах Москвы в выбранный час концентрируется основной спрос и где накапливается нагрузка.",
   },
 };
 
@@ -27,7 +38,7 @@ export default function App() {
   if (loading) {
     return (
       <main className="page-shell">
-        <section className="hero-card state-card">
+        <section className="state-card">
           <p className="eyebrow">Загрузка</p>
           <h1>Подготавливаем карту доставки</h1>
           <p>Читаем CSV и собираем временные срезы по кольцам Москвы.</p>
@@ -39,7 +50,7 @@ export default function App() {
   if (error || !data) {
     return (
       <main className="page-shell">
-        <section className="hero-card state-card error-card">
+        <section className="state-card error-card">
           <p className="eyebrow">Ошибка</p>
           <h1>Не удалось получить данные</h1>
           <p>{error ?? "API не вернуло ожидаемый ответ."}</p>
@@ -68,66 +79,75 @@ export default function App() {
 
   return (
     <main className="page-shell">
-      <section className="hero-card">
-        <div className="hero-copy">
-          <p className="eyebrow">Magnit Dashboard</p>
-          <h1>{data.title}</h1>
-          <p className="hero-description">{data.description}</p>
-        </div>
-
-        <div className="hero-stats">
-          {statCards.map((card) => (
-            <article className="stat-card" key={card.label}>
-              <span>{card.label}</span>
-              <strong>{card.value}</strong>
-            </article>
+      <div className="deck-surface">
+        <header className="deck-nav" aria-label="Разделы презентации">
+          {deckSections.map((section, index) => (
+            <div className={`deck-nav-item${index === 0 ? " active" : ""}`} key={section}>
+              {section}
+            </div>
           ))}
-        </div>
-      </section>
+        </header>
 
-      <section className="control-panel">
-        <div>
-          <p className="section-label">Режим</p>
-          <MetricToggle
-            metrics={data.metrics}
-            value={selectedMetric}
-            onChange={setSelectedMetric}
-          />
-        </div>
-
-        <div className="metric-blurb">
-          <p className="section-label">{metricDetails[selectedMetric]?.title ?? currentMetric.label}</p>
-          <p>{metricDetails[selectedMetric]?.caption ?? currentMetric.description}</p>
-        </div>
-      </section>
-
-      <section className="chart-card">
-        <CircularChart
-          geoJson={data.geoJson}
-          rings={data.rings}
-          timeFrame={currentFrame}
-          metric={currentMetric}
-        />
-      </section>
-
-      <section className="slider-card">
-        <div className="slider-header">
-          <div>
-            <p className="section-label">Время</p>
-            <h2>{currentFrame.label}</h2>
+        <section className="hero-card">
+          <div className="hero-copy">
+            <p className="eyebrow">Магнит сегодня</p>
+            <h1>{data.title}</h1>
+            <p className="hero-description">{data.description}</p>
           </div>
-          <p className="slider-meta">
-            Срез {safeFrameIndex + 1} из {data.timeFrames.length}
-          </p>
-        </div>
 
-        <TimeSlider
-          frames={data.timeFrames}
-          value={safeFrameIndex}
-          onChange={setSelectedFrameIndex}
-        />
-      </section>
+          <div className="hero-stats">
+            {statCards.map((card) => (
+              <article className="stat-card" key={card.label}>
+                <span>{card.label}</span>
+                <strong>{card.value}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="control-panel">
+          <div className="control-block">
+            <p className="section-label">Режим анализа</p>
+            <MetricToggle
+              metrics={data.metrics}
+              value={selectedMetric}
+              onChange={setSelectedMetric}
+            />
+          </div>
+
+          <div className="metric-blurb">
+            <p className="section-label">{metricDetails[selectedMetric]?.title ?? currentMetric.label}</p>
+            <p>{metricDetails[selectedMetric]?.caption ?? currentMetric.description}</p>
+          </div>
+        </section>
+
+        <section className="chart-card">
+          <CircularChart
+            geoJson={data.geoJson}
+            rings={data.rings}
+            timeFrame={currentFrame}
+            metric={currentMetric}
+          />
+        </section>
+
+        <section className="slider-card">
+          <div className="slider-header">
+            <div>
+              <p className="section-label">Время</p>
+              <h2>{currentFrame.label}</h2>
+            </div>
+            <p className="slider-meta">
+              Срез {safeFrameIndex + 1} из {data.timeFrames.length}
+            </p>
+          </div>
+
+          <TimeSlider
+            frames={data.timeFrames}
+            value={safeFrameIndex}
+            onChange={setSelectedFrameIndex}
+          />
+        </section>
+      </div>
     </main>
   );
 }
-
