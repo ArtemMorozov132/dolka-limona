@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1261 295" role="img" aria-labelledby="title">
+  <title>MAGNIT OMNI</title>
+  <rect width="1261" height="295" fill="#0b262d"/>
+  <path
+    fill="#f4f1ef"
+    d="M35 15h299v43H83c-19 0-35 16-35 35v154c0 19-13 34-31 39L0 291V93C0 50 35 15 78 15Zm95 79h127v41h-87v103h-40V94Zm83 0h44l47 53 47-53h44v144h-40v-88l-51 56-51-56v88h-40V94Zm-167 59h40v144h-40V153Zm-1 101h245v41H44c-24 0-44-20-44-44v-45l17-4c19-5 28-20 28-39v-9Z"
+  />
+  <path
+    fill="#f4f1ef"
+    d="M331 16h87l56 101 55-101h88v221h-59V91l-66 117h-35L392 91v146h-61V16Zm349 0h93l96 221h-69l-17-40h-113l-17 40h-67L680 16Zm47 56-36 85h72l-36-85Zm163-56h64l105 128V16h62v221h-56L952 101v136h-62V16Zm283 0h71v221h-71V16Zm-790 125h155v51H383v-51Zm523 110c0-24 20-43 44-43h295v43H906Z"
+  />
+</svg>

@@ -1,16 +1,9 @@
 import { useState } from "react";
+import magnitOmniLogo from "./assets/magnit-omni-logo.svg";
 import { CircularChart } from "./components/CircularChart";
 import { MetricToggle } from "./components/MetricToggle";
 import { TimeSlider } from "./components/TimeSlider";
 import { useStatsData } from "./hooks/useStatsData";
-
-const deckSections = [
-  "Обзор российского рынка",
-  "Стратегия",
-  "Магнит сегодня",
-  "Операционные и финансовые результаты",
-  "Команда",
-];
 
 const metricDetails = {
   lateRate: {
@@ -61,63 +54,20 @@ export default function App() {
 
   const safeFrameIndex = Math.min(selectedFrameIndex, Math.max(data.timeFrames.length - 1, 0));
   const currentFrame = data.timeFrames[safeFrameIndex];
-  const currentMetric = data.metrics.find((metric) => metric.id === selectedMetric) ?? data.metrics[0];
-  const statCards = [
-    {
-      label: "Текущий срез",
-      value: currentFrame.label,
-    },
-    {
-      label: "Колец на карте",
-      value: `${data.rings.length}`,
-    },
-    {
-      label: "Диапазон",
-      value: `0-${Math.round(currentMetric.maxValue)} ${currentMetric.unit}`,
-    },
-  ];
+  const metrics = data.metrics.map((metric) =>
+    metric.id === "orderCount"
+      ? { ...metric, label: "Количество заказов" }
+      : metric,
+  );
+  const currentMetric = metrics.find((metric) => metric.id === selectedMetric) ?? metrics[0];
 
   return (
     <main className="page-shell">
       <div className="deck-surface">
-        <header className="deck-nav" aria-label="Разделы презентации">
-          {deckSections.map((section, index) => (
-            <div className={`deck-nav-item${index === 0 ? " active" : ""}`} key={section}>
-              {section}
-            </div>
-          ))}
-        </header>
-
         <section className="hero-card">
           <div className="hero-copy">
-            <p className="eyebrow">Магнит сегодня</p>
-            <h1>{data.title}</h1>
-            <p className="hero-description">{data.description}</p>
-          </div>
-
-          <div className="hero-stats">
-            {statCards.map((card) => (
-              <article className="stat-card" key={card.label}>
-                <span>{card.label}</span>
-                <strong>{card.value}</strong>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="control-panel">
-          <div className="control-block">
-            <p className="section-label">Режим анализа</p>
-            <MetricToggle
-              metrics={data.metrics}
-              value={selectedMetric}
-              onChange={setSelectedMetric}
-            />
-          </div>
-
-          <div className="metric-blurb">
-            <p className="section-label">{metricDetails[selectedMetric]?.title ?? currentMetric.label}</p>
-            <p>{metricDetails[selectedMetric]?.caption ?? currentMetric.description}</p>
+            <img className="hero-logo" src={magnitOmniLogo} alt="MAGNIT OMNI" />
+            <p className="hero-kicker">инфографика доставки</p>
           </div>
         </section>
 
@@ -146,6 +96,21 @@ export default function App() {
             value={safeFrameIndex}
             onChange={setSelectedFrameIndex}
           />
+        </section>
+
+        <section className="control-panel">
+          <div className="control-block">
+            <MetricToggle
+              metrics={metrics}
+              value={selectedMetric}
+              onChange={setSelectedMetric}
+            />
+          </div>
+
+          <div className="metric-blurb">
+            <p className="section-label">{metricDetails[selectedMetric]?.title ?? currentMetric.label}</p>
+            <p>{metricDetails[selectedMetric]?.caption ?? currentMetric.description}</p>
+          </div>
         </section>
       </div>
     </main>

@@ -91,42 +91,6 @@ input {
   pointer-events: none;
 }
 
-.deck-nav {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 18px;
-  align-items: center;
-  margin-bottom: 28px;
-}
-
-.deck-nav-item {
-  position: relative;
-  padding: 12px 4px;
-  color: var(--text-muted);
-  text-align: center;
-  font-size: 0.95rem;
-  white-space: nowrap;
-}
-
-.deck-nav-item.active {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.deck-nav-item.active::before {
-  content: "";
-  position: absolute;
-  left: 15%;
-  top: 0;
-  width: 46%;
-  height: 26px;
-  border-left: 3px solid var(--accent);
-  border-top: 3px solid var(--accent);
-  border-radius: 14px 0 0 0;
-}
-
 .hero-card,
 .control-panel,
 .chart-card,
@@ -137,10 +101,7 @@ input {
 }
 
 .hero-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr);
-  gap: 30px;
-  padding: 14px 0 28px;
+  padding: 8px 0 18px;
 }
 
 .hero-card::after {
@@ -154,7 +115,7 @@ input {
 }
 
 .hero-copy {
-  max-width: 940px;
+  max-width: 700px;
 }
 
 .hero-copy h1,
@@ -175,6 +136,21 @@ input {
   line-height: 1.58;
 }
 
+.hero-logo {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+}
+
+.hero-kicker {
+  margin: 18px 0 0;
+  color: var(--text);
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 .eyebrow,
 .section-label,
 .stat-card span,
@@ -185,40 +161,21 @@ input {
   letter-spacing: 0.05em;
 }
 
-.hero-stats {
-  display: grid;
-  gap: 14px;
-  align-content: start;
-  padding-top: 16px;
-}
-
-.stat-card {
-  padding: 18px 20px 20px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.16));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.stat-card strong {
-  display: block;
-  margin-top: 8px;
-  font-size: 1.5rem;
-  line-height: 1.3;
-}
-
 .control-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 1fr);
-  gap: 24px;
+  gap: 16px;
   margin-top: 20px;
-  padding: 22px 24px;
+  padding: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.12));
   border: 1px solid var(--line);
   border-radius: 22px;
+  overflow: hidden;
 }
 
 .control-block {
   min-width: 0;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
 }
 
 .toggle-group {
@@ -253,9 +210,9 @@ input {
 }
 
 .metric-blurb {
-  align-self: stretch;
-  padding: 10px 6px 10px 20px;
+  padding: 6px 16px 18px 20px;
   border-left: 3px solid rgba(255, 9, 18, 0.82);
+  margin: 0 16px 16px;
 }
 
 .chart-card,
@@ -367,19 +324,6 @@ input {
 }
 
 @media (max-width: 1180px) {
-  .deck-nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .deck-nav-item {
-    white-space: normal;
-  }
-
-  .hero-card,
-  .control-panel {
-    grid-template-columns: 1fr;
-  }
-
   .chart-card {
     min-height: 620px;
   }
@@ -402,16 +346,6 @@ input {
     height: 32%;
   }
 
-  .deck-nav {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  .deck-nav-item {
-    text-align: left;
-  }
-
   .hero-copy h1,
   .slider-header h2,
   .state-card h1 {
@@ -421,6 +355,19 @@ input {
   .control-panel,
   .slider-card {
     padding: 20px;
+  }
+
+  .control-panel {
+    padding: 0;
+  }
+
+  .control-block {
+    padding: 14px;
+  }
+
+  .metric-blurb {
+    margin: 0 14px 14px;
+    padding: 4px 0 0 16px;
   }
 
   .slider-header {
