@@ -358,13 +358,23 @@ input {
 
   .deck-surface {
     min-height: auto;
-    padding: 18px 18px 22px;
+    padding: 16px 14px 20px;
     border-radius: 14px;
   }
 
   .deck-surface::before {
     width: 64%;
     height: 32%;
+  }
+
+  .deck-surface::after {
+    right: 10px;
+    top: 12px;
+    width: 58px;
+    height: 58px;
+    border-top-width: 7px;
+    border-right-width: 7px;
+    border-radius: 0 14px 0 0;
   }
 
   .hero-copy h1,
@@ -379,17 +389,34 @@ input {
   }
 
   .hero-logo-mark {
-    width: min(30vw, 118px);
-    min-width: 78px;
+    width: min(28vw, 108px);
+    min-width: 72px;
   }
 
   .hero-brand-text {
-    font-size: clamp(2.1rem, 10vw, 3.5rem);
+    font-size: clamp(1.9rem, 9vw, 3.2rem);
+  }
+
+  .hero-kicker {
+    margin-top: 14px;
+    font-size: clamp(1.05rem, 5.8vw, 1.55rem);
+    line-height: 1.08;
+  }
+
+  .chart-card,
+  .slider-card {
+    margin-top: 16px;
+    border-radius: 20px;
+  }
+
+  .chart-card {
+    min-height: 460px;
+    padding: 10px;
   }
 
   .control-panel,
   .slider-card {
-    padding: 20px;
+    padding: 18px;
   }
 
   .control-panel {
@@ -408,14 +435,125 @@ input {
   .slider-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+  }
+
+  .slider-meta {
+    font-size: 0.8rem;
   }
 
   .slider-labels {
     grid-template-columns: 1fr;
+    gap: 8px;
+    font-size: 0.98rem;
   }
 
   .slider-labels strong,
   .slider-labels span:last-child {
     text-align: left;
+  }
+
+  .toggle-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toggle-pill {
+    width: 100%;
+    padding: 16px 18px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-shell {
+    width: calc(100% - 10px);
+    padding-top: 5px;
+  }
+
+  .deck-surface {
+    padding: 12px 10px 16px;
+    border-radius: 12px;
+  }
+
+  .hero-card {
+    padding-bottom: 14px;
+  }
+
+  .hero-brand {
+    gap: 10px;
+  }
+
+  .hero-logo-mark {
+    width: min(26vw, 92px);
+    min-width: 64px;
+  }
+
+  .hero-brand-text {
+    font-size: clamp(1.55rem, 8.4vw, 2.45rem);
+    line-height: 0.88;
+  }
+
+  .hero-kicker {
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+  }
+
+  .chart-card::before,
+  .slider-card::before {
+    left: 12px;
+    top: 12px;
+    width: 40px;
+    height: 14px;
+  }
+
+  .chart-card {
+    min-height: 410px;
+    padding: 8px;
+  }
+
+  .slider-card {
+    padding: 16px 14px 18px;
+  }
+
+  .slider-header h2 {
+    font-size: clamp(1.45rem, 8vw, 2rem);
+  }
+
+  .time-slider {
+    height: 10px;
+  }
+
+  .time-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+
+  .time-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+
+  .slider-labels {
+    font-size: 0.88rem;
+  }
+
+  .control-block {
+    padding: 12px;
+  }
+
+  .toggle-pill {
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  .metric-blurb {
+    margin: 0 12px 12px;
+    padding-left: 12px;
+  }
+
+  .metric-blurb p {
+    font-size: 0.96rem;
+    line-height: 1.45;
   }
 }

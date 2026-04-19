@@ -8,7 +8,50 @@ function formatValue(metricId, rawValue) {
   return rawValue.toFixed(1).replace(".", ",");
 }
 
+function getChartLayout() {
+  if (typeof window === "undefined") {
+    return {
+      height: 650,
+      mapZoom: 8.7,
+      colorbarThickness: 26,
+      colorbarLength: 0.9,
+      colorbarTitleSide: "top",
+    };
+  }
+
+  const width = window.innerWidth;
+
+  if (width <= 420) {
+    return {
+      height: 430,
+      mapZoom: 8.15,
+      colorbarThickness: 18,
+      colorbarLength: 0.72,
+      colorbarTitleSide: "top",
+    };
+  }
+
+  if (width <= 760) {
+    return {
+      height: 520,
+      mapZoom: 8.35,
+      colorbarThickness: 20,
+      colorbarLength: 0.8,
+      colorbarTitleSide: "top",
+    };
+  }
+
+  return {
+    height: 650,
+    mapZoom: 8.7,
+    colorbarThickness: 26,
+    colorbarLength: 0.9,
+    colorbarTitleSide: "top",
+  };
+}
+
 export function CircularChart({ geoJson, rings, timeFrame, metric }) {
+  const chartLayout = getChartLayout();
   const ringValueMap = {};
   timeFrame.values.forEach((entry) => {
     ringValueMap[entry.ringId] = entry;
@@ -67,10 +110,13 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
           colorbar: {
             title: {
               text: metric.label,
+              side: chartLayout.colorbarTitleSide,
               font: {
                 color: "#f4f1ef",
               },
             },
+            thickness: chartLayout.colorbarThickness,
+            len: chartLayout.colorbarLength,
             tickfont: {
               color: "#f4f1ef",
             },
@@ -92,7 +138,7 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
       ]}
       layout={{
         autosize: true,
-        height: 650,
+        height: chartLayout.height,
         margin: { l: 0, r: 0, t: 16, b: 0 },
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
@@ -106,7 +152,7 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
             lat: 55.7522,
             lon: 37.6175,
           },
-          zoom: 8.7,
+          zoom: chartLayout.mapZoom,
         },
       }}
       config={{
