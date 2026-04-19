@@ -1,5 +1,5 @@
 import { useState } from "react";
-import magnitLogoMark from "./assets/magnit-omni-logo.svg";
+import magnitLogoMark from "./assets/magnit-logo-mark.png";
 import { CircularChart } from "./components/CircularChart";
 import { MetricToggle } from "./components/MetricToggle";
 import { TimeSlider } from "./components/TimeSlider";
