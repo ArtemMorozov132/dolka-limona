@@ -17,6 +17,15 @@ import org.springframework.stereotype.Service
 @Service
 class StatsService {
     private val ringOrder = listOf("< 5 km", "5-10 km", "10-15 km", "15-20 km", "> 20 km")
+    private val dayNames = listOf(
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота",
+        "Воскресенье",
+    )
     private val cteMidpoints = mapOf(
         "< 15" to 12.5,
         "15-20" to 17.5,
@@ -106,9 +115,10 @@ class StatsService {
         val orderedTimeFrames = timeBuckets.entries
             .sortedWith(compareBy({ it.key.dayOfWeek }, { it.key.hour }))
             .map { (timeKey, ringBuckets) ->
+                val dayLabel = dayNames.getOrElse(timeKey.dayOfWeek) { "День ${timeKey.dayOfWeek}" }
                 TimeFrameDto(
                     key = "${timeKey.dayOfWeek}-${timeKey.hour}",
-                    label = "День ${timeKey.dayOfWeek}, ${timeKey.hour.toString().padStart(2, '0')}:00",
+                    label = "$dayLabel, ${timeKey.hour.toString().padStart(2, '0')}:00",
                     dayOfWeek = timeKey.dayOfWeek,
                     hour = timeKey.hour,
                     values = ringOrder.map { ring ->
@@ -124,7 +134,6 @@ class StatsService {
             }
 
         val allValues = orderedTimeFrames.flatMap { it.values }
-        val lateMax = allValues.maxOfOrNull { it.lateRate } ?: 0.0
         val deliveryMax = allValues.maxOfOrNull { it.deliveryTime } ?: 0.0
         val orderMax = allValues.maxOfOrNull { it.orderCount.toDouble() } ?: 0.0
 
@@ -276,4 +285,3 @@ class StatsService {
         fun avgDeliveryTime(): Double = if (orderCount == 0) 0.0 else deliveryTimeSum / orderCount
     }
 }
-
