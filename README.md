@@ -99,6 +99,21 @@ Vite поднимет dev-сервер, но для полнофункциона
 
 ## Данные
 
+### Графики Plotly
+
+Сайт получает срезы из API и строит карту в браузере с помощью Plotly при открытии страницы и переключении показателя или времени. Готовые HTML-файлы из `analytics/output/` ему не нужны.
+
+Для создания трёх HTML-графиков из `analytics/data/magnit_data.csv` выполните из корня репозитория:
+
+```bash
+python -m pip install -r analytics/requirements.txt
+python analytics/charts/delivery_time_map.py
+python analytics/charts/late_rate_map.py
+python analytics/charts/order_count_map.py
+```
+
+Результаты сохраняются в `analytics/output/` как `delivery_time.html`, `late_rate.html` и `order_count.html`. Это генерируемые файлы, поэтому они не хранятся в Git.
+
 CSV лежит здесь:
 
 - [magnit_data.csv](C:/Users/User/Dev/dolka-limona/backend/src/main/resources/data/magnit_data.csv)
