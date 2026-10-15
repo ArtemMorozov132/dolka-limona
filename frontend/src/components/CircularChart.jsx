@@ -118,7 +118,7 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
       <Plot
         data={[
           {
-            type: "choroplethmapbox",
+            type: "choroplethmap",
             geojson: geoJson,
             featureidkey: "id",
             locations: rings.map((ring) => ring.id),
@@ -174,7 +174,7 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
             family: '"Segoe UI Variable Text", "Segoe UI", sans-serif',
             color: "#f4f1ef",
           },
-          mapbox: {
+          map: {
             style: "carto-darkmatter",
             center: {
               lat: 55.7522,
@@ -187,7 +187,7 @@ export function CircularChart({ geoJson, rings, timeFrame, metric }) {
           displayModeBar: false,
           responsive: true,
         }}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: chartLayout.height }}
         useResizeHandler
       />
 
